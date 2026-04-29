@@ -16,6 +16,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/todos", require("./routes/todoRoutes"));
 app.use("/api/categories", require("./routes/categoryRoutes"));
+app.use("/uploads", express.static("uploads"));
 
 // test route
 app.get("/", (req, res) => {

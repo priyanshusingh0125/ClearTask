@@ -55,16 +55,24 @@ const Register = () => {
     }
 
     try {
-      setUploading(true); // 🔥 START ANIMATION
+      setUploading(true); //  START ANIMATION
 
-      const res = await axios.post(
-        "http://localhost:5001/api/auth/register",
-        {
-          name: form.name,
-          email: form.email,
-          password: form.password
-        }
-      );
+      const formData = new FormData();
+
+formData.append("name", form.name);
+formData.append("email", form.email);
+formData.append("password", form.password);
+formData.append("image", image); 
+
+const res = await axios.post(
+  "http://localhost:5001/api/auth/register",
+  formData,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  }
+);
 
       localStorage.setItem("userId", res.data.userId);
       localStorage.setItem("userName", res.data.name);

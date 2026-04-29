@@ -17,7 +17,7 @@ const Navbar = () => {
   //  REAL USER (FROM LOCAL STORAGE)
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName");
-  const userImage = localStorage.getItem("userImage"); // 🔥 ADDED
+  const userImage = localStorage.getItem("userImage");
 
   const user = {
     name: userName || "Guest",
@@ -28,7 +28,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
-    localStorage.removeItem("userImage"); // 🔥 ADDED
+    localStorage.removeItem("userImage");
     navigate("/login");
   };
 
@@ -185,8 +185,11 @@ const Navbar = () => {
                 {user.isLoggedIn && (
                   <div className="flex items-center gap-3 bg-white/10 px-3 py-2 rounded-xl border border-white/20">
                     <img
-                      src={userImage || "https://cdn-icons-png.flaticon.com/512/847/847969.png"}
-                      alt="profile"
+                      src={
+                        userImage
+                          ? `http://localhost:5001/${userImage}`
+                          : "https://cdn-icons-png.flaticon.com/512/847/847969.png"
+                      } alt="profile"
                       className="w-9 h-9 rounded-full object-cover"
                     />
                     <span className="text-white">{user.name}</span>
