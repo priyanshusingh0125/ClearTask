@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     required: true
   },
 
-  // 🔥 ADDED FIELD (PROFILE IMAGE)
+  //  ADDED FIELD (PROFILE IMAGE)
   profileImage: {
     type: String,
     default: ""

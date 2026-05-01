@@ -40,11 +40,12 @@ const user = await User.create({
 });
 
     res.json({
-      message: "User registered successfully",
-      userId: user._id,
-      name: user.name,
-      email: user.email
-    });
+  message: "User registered successfully",
+  userId: user._id,
+  name: user.name,
+  email: user.email,
+  profileImage: user.profileImage 
+});
 
   } catch (err) {
     console.error("REGISTER ERROR 👉", err);
@@ -78,11 +79,13 @@ router.post("/login", async (req, res) => {
 
     // SUCCESS RESPONSE
     res.json({
-      message: "Login successful",
-      userId: user._id,
-      name: user.name,
-      email: user.email
-    });
+  message: "Login successful",
+  userId: user._id,
+  name: user.name,
+  email: user.email,
+  profileImage: user.profileImage 
+});
+
 
   } catch (err) {
     console.error("LOGIN ERROR 👉", err);

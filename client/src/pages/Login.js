@@ -34,6 +34,7 @@ const Login = () => {
 
       localStorage.setItem("userId", res.data.userId);
       localStorage.setItem("userName", res.data.name);
+      localStorage.setItem("userImage", res.data.profileImage);
 
       alert('Login Successful');
       navigate('/');

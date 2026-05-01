@@ -7,6 +7,7 @@ const DashboardCards = () => {
 
   const navigate = useNavigate();
  const userId = localStorage.getItem("userId");
+ const userImage = localStorage.getItem("userImage");
 
   const [total, setTotal] = useState(0);
   const [completed, setCompleted] = useState(0);
@@ -20,9 +21,11 @@ const DashboardCards = () => {
   const userName = localStorage.getItem("userName");
 
   const user = {
-    name: userName || "Guest",
-    image: "https://i.pravatar.cc/100"
-  };
+  name: userName || "Guest",
+  image: userImage
+    ? `http://localhost:5001/${userImage}`
+    : "https://cdn-icons-png.flaticon.com/512/847/847969.png"
+};
 
   // FETCH TODOS
   useEffect(() => {

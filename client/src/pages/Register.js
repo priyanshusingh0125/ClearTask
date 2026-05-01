@@ -76,6 +76,7 @@ const res = await axios.post(
 
       localStorage.setItem("userId", res.data.userId);
       localStorage.setItem("userName", res.data.name);
+      localStorage.setItem("userImage", res.data.profileImage);
 
       setUploading(false); // 🔥 STOP ANIMATION
 
