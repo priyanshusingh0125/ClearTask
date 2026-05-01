@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import DashboardCards from "../components/DashboardCards";
 import NotesCards from "../components/NotesCard";
+const API = process.env.REACT_APP_API_URL;
 
 const Dashboard = () => {
   const [todos, setTodos] = useState([]);
@@ -15,7 +16,7 @@ const Dashboard = () => {
   const fetchTodos = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5001/api/todos?userId=${userId}`
+              `${API}/api/todos?userId=${userId}`
       );
       setTodos(res.data);
     } catch (err) {
@@ -34,12 +35,12 @@ const Dashboard = () => {
     try {
       if (editId) {
         await axios.put(
-          `http://localhost:5001/api/todos/${editId}`,
+          `${API}/api/todos/${editId}`,
           { title }
         );
         setEditId(null);
       } else {
-        await axios.post("http://localhost:5001/api/todos", {
+        await axios.post(`${API}/api/todos`, {
           userId,
           title
         });
@@ -55,14 +56,14 @@ const Dashboard = () => {
 
   // ❌ Delete
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5001/api/todos/${id}`);
+    await axios.delete(`${API}/api/todos/${id}`);
     fetchTodos();
   };
 
   // Toggle
   const handleToggle = async (id) => {
     await axios.put(
-      `http://localhost:5001/api/todos/toggle/${id}`
+      `${API}/api/todos/toggle/${id}`
     );
     fetchTodos();
   };

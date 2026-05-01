@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+const API = process.env.REACT_APP_API_URL;
 
 const Navbar = () => {
 
@@ -179,22 +180,22 @@ const Navbar = () => {
 
               </div>
 
-              {/* BOTTOM */}
-              <div className="space-y-4">
+                {/* BOTTOM */}
+                <div className="space-y-4">
 
-                {user.isLoggedIn && (
-                  <div className="flex items-center gap-3 bg-white/10 px-3 py-2 rounded-xl border border-white/20">
-                    <img
-                      src={
-                        userImage
-                          ? `http://localhost:5001/${userImage}`
-                          : "https://cdn-icons-png.flaticon.com/512/847/847969.png"
-                      } alt="profile"
-                      className="w-9 h-9 rounded-full object-cover"
-                    />
-                    <span className="text-white">{user.name}</span>
-                  </div>
-                )}
+                  {user.isLoggedIn && (
+                    <div className="flex items-center gap-3 bg-white/10 px-3 py-2 rounded-xl border border-white/20">
+                      <img
+                        src={
+                          userImage
+                            ? `${API}/${userImage}`
+                            : "https://cdn-icons-png.flaticon.com/512/847/847969.png"
+                        } alt="profile"
+                        className="w-9 h-9 rounded-full object-cover"
+                      />
+                      <span className="text-white">{user.name}</span>
+                    </div>
+                  )}
 
                 {user.isLoggedIn ? (
                   <button

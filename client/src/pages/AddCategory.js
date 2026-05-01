@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const API = process.env.REACT_APP_API_URL;
 
 const AddCategory = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const AddCategory = () => {
   const fetchCategories = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5001/api/categories?userId=${userId}`
+        `${API}/api/categories?userId=${userId}`
       );
       setCategories(res.data);
     } catch (err) {
@@ -61,13 +62,13 @@ const AddCategory = () => {
       if (editId) {
         // ✏️ UPDATE
         await axios.put(
-          `http://localhost:5001/api/categories/${editId}`,
+          `${API}/api/categories/${editId}`,
           form
         );
         setEditId(null);
       } else {
         // ➕ ADD
-        await axios.post("http://localhost:5001/api/categories", {
+        await axios.post(`${API}/api/categories`, {
           userId,
           name: form.name,
           color: form.color
@@ -92,7 +93,7 @@ const AddCategory = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5001/api/categories/${id}`
+        `${API}/api/categories/${id}`
       );
       fetchCategories();
     } catch (err) {

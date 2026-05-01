@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const API = process.env.REACT_APP_API_URL;
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const AddTask = () => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5001/api/categories?userId=${userId}`
+          `${API}/api/categories?userId=${userId}`
         );
         setCategories(res.data);
       } catch (err) {
@@ -74,7 +75,7 @@ const AddTask = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5001/api/todos", {
+      const res = await axios.post(`${API}/api/todos`, {
         userId,
         title: form.title,
         description: form.description,

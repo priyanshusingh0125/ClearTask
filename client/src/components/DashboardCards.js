@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+const API = process.env.REACT_APP_API_URL;
+
 
 const DashboardCards = () => {
 
@@ -23,7 +25,7 @@ const DashboardCards = () => {
   const user = {
   name: userName || "Guest",
   image: userImage
-    ? `http://localhost:5001/${userImage}`
+    ? `${API}/${userImage}`
     : "https://cdn-icons-png.flaticon.com/512/847/847969.png"
 };
 
@@ -32,7 +34,7 @@ const DashboardCards = () => {
     const fetchTodos = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5001/api/todos?userId=${userId}`
+          `${API}/api/todos?userId=${userId}`
         );
 
         const todos = res.data;

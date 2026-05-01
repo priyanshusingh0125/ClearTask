@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import NoteDetailModal from "./NoteDetailModal";
+const API = process.env.REACT_APP_API_URL;
 
 const NotesCards = () => {
 
@@ -19,7 +20,7 @@ const NotesCards = () => {
     const fetchTodos = async () => {
         try {
             const res = await axios.get(
-                `http://localhost:5001/api/todos?userId=${userId}`
+                `${API}/api/todos?userId=${userId}`
             );
             setTodos(res.data);
         } catch (err) {
@@ -31,7 +32,7 @@ const NotesCards = () => {
     const fetchCategories = async () => {
         try {
             const res = await axios.get(
-                `http://localhost:5001/api/categories?userId=${userId}`
+                `${API}/api/categories?userId=${userId}`
             );
             setCategories(res.data);
         } catch (err) {
@@ -52,7 +53,7 @@ const NotesCards = () => {
     const handleToggle = async (id) => {
         try {
             await axios.put(
-                `http://localhost:5001/api/todos/toggle/${id}`
+                `${API}/api/todos/toggle/${id}`
             );
             fetchTodos();
         } catch (err) {

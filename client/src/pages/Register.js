@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+const API = process.env.REACT_APP_API_URL;
 
 const Register = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ formData.append("password", form.password);
 formData.append("image", image); 
 
 const res = await axios.post(
-  "http://localhost:5001/api/auth/register",
+  `${API}/api/auth/register`,
   formData,
   {
     headers: {

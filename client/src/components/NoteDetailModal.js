@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 const NoteDetailModal = ({ todo, onClose, onToggle, getCategoryColor }) => {
 
   if (!todo) return null;
