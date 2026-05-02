@@ -8,8 +8,14 @@ const app = express();
 
 connectDB();
 
+app.use(cors({
+  origin: [
+    "https://clear-task-mu.vercel.app",
+    "http://localhost:3000"
+  ]
+}));
+
 // middleware
-app.use(cors());
 app.use(express.json());
 
 // routes

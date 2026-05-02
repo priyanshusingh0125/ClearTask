@@ -3,7 +3,7 @@ const Category = require("../models/Category");
 const mongoose = require("mongoose");
 
 
-// ➕ ADD CATEGORY
+// ADD CATEGORY
 router.post("/", async (req, res) => {
   try {
     const { userId, name, color } = req.body;
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
 });
 
 
-// 📋 GET ALL CATEGORIES (USER WISE)
+// GET ALL CATEGORIES (USER WISE)
 router.get("/", async (req, res) => {
   try {
     const categories = await Category.find({
@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// 🔍 GET SINGLE CATEGORY
+// GET SINGLE CATEGORY
 router.get("/:id", async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -61,7 +61,7 @@ router.get("/:id", async (req, res) => {
 });
 
 
-// ✏️ UPDATE CATEGORY
+// UPDATE CATEGORY
 router.put("/:id", async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -87,7 +87,7 @@ router.put("/:id", async (req, res) => {
 });
 
 
-// ❌ DELETE CATEGORY
+// DELETE CATEGORY
 router.delete("/:id", async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -102,6 +102,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;
