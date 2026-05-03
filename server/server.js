@@ -10,12 +10,23 @@ const app = express();
 connectDB();
 
 
-// ✅ CORS FIX
+const cors = require("cors");
+
 app.use(cors({
-  origin: "*",
+  origin: [
+    "http://localhost:3000",
+    "https://clear-task-mu.vercel.app"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
+app.options("*", cors());
+
+app.use((err, req, res, next) => {
+  console.error("SERVER ERROR 👉", err);
+  res.status(500).json("Server error");
+});
 
 app.use(express.json());
 
