@@ -14,6 +14,8 @@ const upload = multer({ storage });
 
 // REGISTER
 router.post("/register", upload.single("image"), async (req, res) => {
+    console.log("Register API HIT");
+
   try {
     const { name, email, password } = req.body;
 
