@@ -8,6 +8,21 @@ const app = express();
 
 connectDB();
 
+
+// ✅ CORS FIX
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+app.use(express.json());
+
+// ✅ UPLOAD FOLDER AUTO CREATE
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
+
 app.use(cors({
   origin: [
     "https://clear-task-mu.vercel.app",
