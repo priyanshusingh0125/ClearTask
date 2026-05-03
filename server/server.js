@@ -19,7 +19,6 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors());
 
 app.use((err, req, res, next) => {
   console.error("SERVER ERROR 👉", err);
