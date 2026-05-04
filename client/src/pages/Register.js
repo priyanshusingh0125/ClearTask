@@ -46,12 +46,12 @@ const Register = () => {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.password) {
-      alert("All fields required ❌");
+      alert("All fields required ");
       return;
     }
 
     if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match ❌");
+      alert("Passwords do not match ");
       return;
     }
 
@@ -81,12 +81,12 @@ const res = await axios.post(
 
       setUploading(false); // 🔥 STOP ANIMATION
 
-      alert("Register Successful ✅");
+      alert("Register Successful ");
       navigate("/");
 
     } catch (err) {
       setUploading(false);
-      alert(err.response?.data || "Error ❌");
+      alert(err.response?.data || "Error ");
     }
   };
 

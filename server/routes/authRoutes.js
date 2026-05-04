@@ -1,23 +1,15 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const multer = require("multer");
 
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
-  }
-});
-
-const upload = multer({ storage });
-
-// REGISTER
-router.post("/register", upload.single("image"), async (req, res) => {
-    console.log("Register API HIT");
+// ================= REGISTER =================
+router.post("/register", async (req, res) => {
+  console.log("Register API HIT");
 
   try {
     const { name, email, password } = req.body;
+
+    console.log("BODY 👉", req.body);
 
     // validation
     if (!name || !email || !password) {
@@ -34,32 +26,36 @@ router.post("/register", upload.single("image"), async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // create user
-const user = await User.create({
-  name,
-  email,
-  password: hashedPassword,
-  profileImage: req.file ? req.file.path : ""
-});
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      profileImage: "" // TEMP (no upload)
+    });
 
-    res.json({
-  message: "User registered successfully",
-  userId: user._id,
-  name: user.name,
-  email: user.email,
-  profileImage: user.profileImage 
-});
+    return res.json({
+      message: "User registered successfully",
+      userId: user._id,
+      name: user.name,
+      email: user.email,
+      profileImage: user.profileImage
+    });
 
   } catch (err) {
     console.error("REGISTER ERROR 👉", err);
-    res.status(500).json("Server error");
+    return res.status(500).json("Server error");
   }
 });
 
 
-// LOGIN
+// ================= LOGIN =================
 router.post("/login", async (req, res) => {
+  console.log("Login API HIT");
+
   try {
     const { email, password } = req.body;
+
+    console.log("BODY 👉", req.body);
 
     // validation
     if (!email || !password) {
@@ -79,19 +75,17 @@ router.post("/login", async (req, res) => {
       return res.status(400).json("Wrong password");
     }
 
-    // SUCCESS RESPONSE
-    res.json({
-  message: "Login successful",
-  userId: user._id,
-  name: user.name,
-  email: user.email,
-  profileImage: user.profileImage 
-});
-
+    return res.json({
+      message: "Login successful",
+      userId: user._id,
+      name: user.name,
+      email: user.email,
+      profileImage: user.profileImage
+    });
 
   } catch (err) {
-    console.error("LOGIN ERROR", err);
-    res.status(500).json("Server error");
+    console.error("LOGIN ERROR ", err);
+    return res.status(500).json("Server error");
   }
 });
 
